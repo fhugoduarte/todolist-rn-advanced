@@ -1,0 +1,74 @@
+
+
+GET http://localhost:3000/tasks
+
+###
+
+GET http://localhost:3000/tasks/284512de-a2eb-4262-a291-5b14832f9d96
+
+###
+
+POST http://localhost:3000/tasks HTTP/1.1
+content-type: application/json
+
+{
+    "title": "sample",
+    "description": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
+
+###
+
+PUT http://localhost:3000/tasks/66d85657-02b6-43d9-a4d1-e4996c78da4f HTTP/1.1
+content-type: application/json
+
+{
+    "title": "sample2",
+    "description": "Wed, 21 Oct 2015 18:27:50 GMT",
+    "tag": "sample"
+}
+
+###
+
+DELETE http://localhost:3000/tasks/66d85657-02b6-43d9-a4d1-e4996c78da4f HTTP/1.1
+content-type: application/json
+
+
+
+
+
+
+
+
+###
+
+
+GET http://localhost:3000/tags
+
+###
+
+GET http://localhost:3000/tags/284512de-a2eb-4262-a291-5b14832f9d96
+
+###
+
+POST http://localhost:3000/tags HTTP/1.1
+content-type: application/json
+
+{
+    "title": "sample",
+    "description": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
+
+###
+
+PUT http://localhost:3000/tags/284512de-a2eb-4262-a291-5b14832f9d96 HTTP/1.1
+content-type: application/json
+
+{
+    "title": "sample2",
+    "description": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
+
+###
+
+DELETE http://localhost:3000/tags/66d85657-02b6-43d9-a4d1-e4996c78da4f HTTP/1.1
+content-type: application/json

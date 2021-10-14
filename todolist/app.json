@@ -1,0 +1,12 @@
+{
+  "name": "todolist",
+  "displayName": "todolist",
+  "expo": {
+    "name": "todolist",
+    "slug": "todolist",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
