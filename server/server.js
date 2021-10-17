@@ -7,6 +7,10 @@ const PORT = 3000;
 const tasks = [];
 const tags = [];
 
+function paginate(array, page, perPage) {
+  return array.slice((page - 1) * perPage, page * perPage);
+}
+
 app.use(express.json());
 
 // --------------------------------- TASKS ---------------------------------
@@ -97,12 +101,12 @@ app.delete("/tasks/:id", (req, res) => {
     return res.status(404).json({ message: "Tarefa não existe" });
   }
 
-  tasks.slice(taskIndex, 1);
+  tasks.splice(taskIndex, 1);
 
-  return res.status(204);
+  return res.status(204).json({});
 });
 
-app.post("task/:id/check", (req, res) => {
+app.patch("/tasks/:id/check", (req, res) => {
   const taskIndex = tasks.findIndex((task) => req.params.id === task.id);
 
   if (taskIndex === -1) {
@@ -113,18 +117,25 @@ app.post("task/:id/check", (req, res) => {
     ...tasks[taskIndex],
     done: !tasks[taskIndex].done,
   };
+
+  return res.json(tasks[taskIndex]);
 });
 
 // --------------------------------- TAGS ---------------------------------
 
-app.get("/tags", (_req, res) => {
-  return res.json(tags);
+app.get("/tags", (req, res) => {
+  const { page = 1, perPage = 10 } = req.query;
+
+  return res.json({
+    data: paginate(tags, page, perPage),
+    total: tags.length,
+  });
 });
 
-app.get("/tags/:id", (_req, res) => {
+app.get("/tags/:id", (req, res) => {
   const tagFound = tags.find((tag) => tag.id === req.params.id);
 
-  if (tagFound) {
+  if (!tagFound) {
     return res.status(404).json({ message: "Tag não encontrada" });
   }
 
@@ -166,9 +177,9 @@ app.delete("/tags/:id", (req, res) => {
     return res.status(404).json({ message: "Tag não existe" });
   }
 
-  tags.slice(tagIndex, 1);
+  tags.splice(tagIndex, 1);
 
-  return res.status(204);
+  return res.status(204).json({});
 });
 
 app.listen(PORT, () => {

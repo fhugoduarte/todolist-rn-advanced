@@ -29,6 +29,10 @@ content-type: application/json
 
 ###
 
+GET http://localhost:3000/tasks/aa7811ca-66f2-4451-bfad-d79e466f1c6a/check HTTP/1.1
+
+###
+
 DELETE http://localhost:3000/tasks/66d85657-02b6-43d9-a4d1-e4996c78da4f HTTP/1.1
 content-type: application/json
 
@@ -54,8 +58,8 @@ POST http://localhost:3000/tags HTTP/1.1
 content-type: application/json
 
 {
-    "title": "sample",
-    "description": "Wed, 21 Oct 2015 18:27:50 GMT"
+    "title": "Tag",
+    "color": "#7159c1"
 }
 
 ###
@@ -70,5 +74,5 @@ content-type: application/json
 
 ###
 
-DELETE http://localhost:3000/tags/66d85657-02b6-43d9-a4d1-e4996c78da4f HTTP/1.1
+DELETE http://localhost:3000/tags/7bc8e46e-a82e-4e28-9b32-fceda4979973 HTTP/1.1
 content-type: application/json
