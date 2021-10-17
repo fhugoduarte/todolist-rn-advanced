@@ -1,41 +1,54 @@
-import React from "react";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import React from 'react';
 
-import { PendingTasksScreen } from "../../../screens/app/tasks/screens/PendingTasks";
-import { CompletedTasksScreen } from "../../../screens/app/tasks/screens/CompletedTasks";
-import type { TasksGroupParams } from "./tasks.group";
-import { generateLinkingConfig } from "../../../utils/navigation";
+import { generateLinkingConfig } from '~/utils/navigation';
 
-export type TasksTopTabParams = TasksGroupParams & {
-  CompletedTasks: undefined;
+import { colors } from '~/constants/colors';
+import { CompletedTasksScreen } from '~/screens/app/tasks/CompletedTasks';
+import { PendingTasksScreen } from '~/screens/app/tasks/PendingTasks';
+
+import type { TasksGroupParams } from './tasks.group';
+
+export type TasksTopParams = TasksGroupParams & {
   PendingTasks: undefined;
+  CompletedTasks: undefined;
 };
 
-const TopTab = createMaterialTopTabNavigator<TasksTopTabParams>();
-
-export const linkingConfig = generateLinkingConfig<TasksTopTabParams>({
+export const linkingConfig = generateLinkingConfig<TasksTopParams>({
   paths: {
-    CompletedTasks: "completed",
-    PendingTasks: "pending",
+    PendingTasks: 'pending',
+    CompletedTasks: 'completed',
   },
 });
 
+const TopTab = createMaterialTopTabNavigator<TasksTopParams>();
+
 export function TasksTopTab() {
   return (
-    <TopTab.Navigator>
+    <TopTab.Navigator
+      screenOptions={{
+        tabBarInactiveTintColor: colors.supportText,
+        tabBarActiveTintColor: colors.primary,
+        tabBarIndicatorStyle: {
+          backgroundColor: colors.primary,
+        },
+        tabBarLabelStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    >
       <TopTab.Screen
         name="PendingTasks"
         component={PendingTasksScreen}
         options={{
-          tabBarLabel: "Pendentes",
+          tabBarLabel: 'Pendentes',
         }}
       />
-
       <TopTab.Screen
         name="CompletedTasks"
         component={CompletedTasksScreen}
         options={{
-          tabBarLabel: "Completas",
+          tabBarLabel: 'Completas',
         }}
       />
     </TopTab.Navigator>

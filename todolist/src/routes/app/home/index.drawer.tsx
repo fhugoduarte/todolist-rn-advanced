@@ -1,48 +1,64 @@
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { PathConfigMap } from "@react-navigation/native";
-import React from "react";
+import type { DrawerScreenProps } from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import React from 'react';
 
-import { generateLinkingConfig } from "../../../utils/navigation";
-import {
-  TagsStack,
-  linkingConfig as tagsLinks,
-  TagsStackParams,
-} from "../tags/index.stack";
-import {
-  TasksTopTab,
-  linkingConfig as tasksLinks,
-  TasksTopTabParams,
-} from "../tasks/index.top";
+import { AddButton } from '~/components/AddButton';
+import { Drawer as DrawerComponent } from '~/components/Drawer';
+import { generateLinkingConfig } from '~/utils/navigation';
 
-export type HomeDrawerParams = {
-  Tasks?: {
-    screen?: TasksTopTabParams;
-  };
-  Tags?: {
-    screen?: TagsStackParams;
-  };
+import { colors } from '~/constants/colors';
+
+import { linkingConfig as tagsLinks, TagsStack } from '../tags/index.stack';
+import { linkingConfig as tasksLinks, TasksTopTab } from '../tasks/index.top';
+import type { TasksGroupParams } from '../tasks/tasks.group';
+
+export type HomeDrawerParams = TasksGroupParams & {
+  Tasks: undefined;
+  Tags: undefined;
 };
 
 export const linkingConfig = generateLinkingConfig<HomeDrawerParams>({
   paths: {
     Tasks: {
-      path: "tasks",
-      screens: tasksLinks as PathConfigMap<HomeDrawerParams>,
+      path: 'tasks',
+      exact: true,
+      screens: tasksLinks as any,
     },
     Tags: {
-      path: "tags",
-      screens: tagsLinks as PathConfigMap<HomeDrawerParams>,
+      path: 'tags',
+      exact: true,
+      screens: tagsLinks as any,
     },
   },
 });
 
 const Drawer = createDrawerNavigator<HomeDrawerParams>();
 
-export function HomeDrawer() {
+export function HomeDrawer({
+  navigation,
+}: DrawerScreenProps<HomeDrawerParams>) {
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Tasks" component={TasksTopTab} />
-      <Drawer.Screen name="Tags" component={TagsStack} />
+    <Drawer.Navigator drawerContent={props => <DrawerComponent {...props} />}>
+      <Drawer.Screen
+        name="Tasks"
+        component={TasksTopTab}
+        options={{
+          headerTitle: '',
+          headerRight: () => (
+            <AddButton onPress={() => navigation.navigate('NewTask')} />
+          ),
+          drawerType: 'front',
+          headerTintColor: colors.title,
+        }}
+      />
+      <Drawer.Screen
+        name="Tags"
+        component={TagsStack}
+        options={{
+          swipeEnabled: false,
+          headerShown: false,
+        }}
+      />
     </Drawer.Navigator>
   );
 }

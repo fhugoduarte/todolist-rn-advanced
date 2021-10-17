@@ -2,7 +2,7 @@ import type {
   ParamListBase,
   PathConfig,
   PathConfigMap,
-} from "@react-navigation/native";
+} from '@react-navigation/native';
 
 type LinkingConfig<T extends ParamListBase> = {
   baseUrl?: string;
@@ -12,7 +12,7 @@ type LinkingConfig<T extends ParamListBase> = {
 };
 
 export function generateLinkingConfig<T extends ParamListBase>(
-  params?: LinkingConfig<T>
+  params?: LinkingConfig<T>,
 ): PathConfigMap<T> {
   if (!params) {
     return {};
@@ -36,15 +36,15 @@ export function generateLinkingConfig<T extends ParamListBase>(
       };
     }
 
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       return {
         ...prevValue,
-        [currentKey]: [baseUrl, value].join("/"),
+        [currentKey]: [baseUrl, value].join('/'),
       };
     }
 
     if (value.path) {
-      value.path = [baseUrl, value.path].join("/");
+      value.path = [baseUrl, value.path].join('/');
     }
 
     if (value.screens) {

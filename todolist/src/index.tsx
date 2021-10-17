@@ -1,7 +1,23 @@
-import React from "react";
+import React from 'react';
+import { StatusBar } from 'react-native';
+import { QueryClientProvider } from 'react-query';
 
-import { Routes } from "./routes";
+import { useCreateQueryClient } from '~/hooks/useCreateQueryClient';
+
+import { Routes } from './routes';
 
 export function Main() {
-  return <Routes />;
+  const client = useCreateQueryClient();
+
+  return (
+    <QueryClientProvider client={client}>
+      <StatusBar
+        barStyle="dark-content"
+        translucent
+        backgroundColor="transparent"
+      />
+
+      <Routes />
+    </QueryClientProvider>
+  );
 }

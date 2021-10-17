@@ -1,9 +1,11 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React from "react";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from 'react';
 
-import { EditTasksScreen } from "../../../screens/app/tasks/screens/EditTasks";
-import { NewTasksScreen } from "../../../screens/app/tasks/screens/NewTasks";
-import { generateLinkingConfig } from "../../../utils/navigation";
+import { StackHeader } from '~/components/StackHeader';
+import { generateLinkingConfig } from '~/utils/navigation';
+
+import { EditTaskScreen } from '~/screens/app/tasks/EditTask';
+import { NewTaskScreen } from '~/screens/app/tasks/NewTask';
 
 export type TasksGroupParams = {
   NewTask: undefined;
@@ -13,10 +15,10 @@ export type TasksGroupParams = {
 };
 
 export const linkingConfig = generateLinkingConfig<TasksGroupParams>({
-  baseUrl: "tasks",
+  baseUrl: 'tasks',
   paths: {
-    NewTask: "create",
-    EditTask: "edit/:id",
+    NewTask: 'new',
+    EditTask: 'edit/:id',
   },
 });
 
@@ -24,9 +26,25 @@ const Stack = createNativeStackNavigator<TasksGroupParams>();
 
 export function TasksGroup() {
   return (
-    <Stack.Group>
-      <Stack.Screen name="NewTask" component={NewTasksScreen} />
-      <Stack.Screen name="EditTask" component={EditTasksScreen} />
+    <Stack.Group
+      screenOptions={{
+        header: props => <StackHeader {...props} />,
+      }}
+    >
+      <Stack.Screen
+        name="NewTask"
+        component={NewTaskScreen}
+        options={{
+          title: 'Criar Tarefa',
+        }}
+      />
+      <Stack.Screen
+        name="EditTask"
+        component={EditTaskScreen}
+        options={{
+          title: 'Editar Tarefa',
+        }}
+      />
     </Stack.Group>
   );
 }

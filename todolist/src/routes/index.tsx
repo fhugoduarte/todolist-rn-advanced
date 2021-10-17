@@ -1,13 +1,13 @@
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer } from '@react-navigation/native';
+import React from 'react';
 
-import { RootRoutes, linkingConfig } from "./_root.routes";
+import { RootRoutes, linkingConfig } from './_root.routes';
 
 export function Routes() {
   return (
     <NavigationContainer
       linking={{
-        prefixes: ["todolist://todolist"],
+        prefixes: ['todoapp://todoapp'],
         config: {
           screens: linkingConfig,
         },

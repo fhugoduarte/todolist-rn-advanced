@@ -1,31 +1,48 @@
-import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from 'react';
 
-import { SignInScreen } from "../../screens/auth/screens/SignIn";
-import { SignUpScreen } from "../../screens/auth/screens/SignUp";
-import { generateLinkingConfig } from "../../utils/navigation";
+import { StackHeader } from '~/components/StackHeader';
+import { generateLinkingConfig } from '~/utils/navigation';
+
+import { SignInScreen } from '~/screens/auth/SignIn';
+import { SignUpScreen } from '~/screens/auth/SignUp';
 
 export type AuthStackParams = {
   SignIn: undefined;
   SignUp: undefined;
 };
 
+const Stack = createNativeStackNavigator<AuthStackParams>();
+
 export const linkingConfig = generateLinkingConfig<AuthStackParams>({
-  baseUrl: "auth",
+  baseUrl: 'auth',
   paths: {
-    SignIn: "signIn",
-    SignUp: "signUp",
+    SignIn: 'signIn',
+    SignUp: 'signUp',
   },
 });
 
-const Stack = createNativeStackNavigator<AuthStackParams>();
-
 export function AuthStack() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="SignIn" component={SignInScreen} />
-
-      <Stack.Screen name="SignUp" component={SignUpScreen} />
+    <Stack.Navigator
+      screenOptions={{
+        header: props => <StackHeader {...props} />,
+      }}
+    >
+      <Stack.Screen
+        name="SignIn"
+        component={SignInScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUpScreen}
+        options={{
+          title: 'Cadastrar',
+        }}
+      />
     </Stack.Navigator>
   );
 }
