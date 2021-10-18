@@ -7,9 +7,10 @@ import { AuthStack, linkingConfig as authLinks } from './auth/index.stack';
 export const linkingConfig = generateLinkingConfig({
   paths: {
     ...appLinks,
+    ...authLinks,
   },
 });
 
 export function RootRoutes() {
-  return <AuthStack />;
+  return <AppStack />;
 }

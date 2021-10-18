@@ -6,6 +6,8 @@ import { Button } from '~/components/Button';
 import { InputForm } from '~/components/form/InputForm';
 
 import { useValidateForm } from '~/hooks/useValidateForm';
+import type { FormData } from '~/queries/useCreateTagMutation';
+import { useCreateTagMutation } from '~/queries/useCreateTagMutation';
 import type { TasksGroupParams } from '~/routes/app/tasks/tasks.group';
 
 import { schema } from './schema';
@@ -15,12 +17,18 @@ import { styles } from './styles';
 type Props = NativeStackScreenProps<TasksGroupParams, 'NewTask'>;
 
 export function NewTagScreen({ navigation }: Props) {
-  const { control, handleSubmit } = useValidateForm({
+  const createTagMutation = useCreateTagMutation({
+    onSuccess: () => {
+      navigation.goBack();
+    },
+  });
+
+  const { control, handleSubmit } = useValidateForm<FormData>({
     schema,
   });
 
-  function handleCreateTag() {
-    // do nothing
+  function handleCreateTag(formData: FormData) {
+    createTagMutation.mutate(formData);
   }
 
   return (
@@ -32,6 +40,7 @@ export function NewTagScreen({ navigation }: Props) {
         <Button
           title="CRIAR"
           onPress={handleSubmit(handleCreateTag)}
+          isLoading={createTagMutation.isLoading}
           style={styles.button}
         />
       </View>

@@ -1,7 +1,7 @@
 import type { AxiosError } from 'axios';
 import { useEffect } from 'react';
 import { LogBox } from 'react-native';
-import { QueryClient } from 'react-query';
+import { QueryClient } from 'react-query/';
 
 import { useNetworkInfo } from './useNetworkInfo';
 

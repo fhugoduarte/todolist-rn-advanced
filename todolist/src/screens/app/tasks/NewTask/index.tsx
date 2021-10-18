@@ -12,14 +12,21 @@ import { schema } from './schema';
 
 import { styles } from './styles';
 
+interface FormData {
+  title: string;
+  description: string;
+  tag?: string;
+}
+
 type Props = NativeStackScreenProps<TasksGroupParams, 'NewTask'>;
 
 export function NewTaskScreen({ navigation }: Props) {
-  const { control, handleSubmit } = useValidateForm({
+  const { control, handleSubmit } = useValidateForm<FormData>({
     schema,
   });
 
-  function handleCreateTask() {
+  function handleCreateTask(data: FormData) {
+    console.log('DATA', data);
     // do nothing
   }
 

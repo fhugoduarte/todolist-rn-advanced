@@ -17,7 +17,7 @@ const InputFormComponent = forwardRef<TextInput, Props>(
         defaultValue={defaultValue}
         shouldUnregister={shouldUnregister}
         rules={rules}
-        render={({ field, formState, fieldState }) => {
+        render={({ field, fieldState }) => {
           return (
             <Input
               {...rest}
