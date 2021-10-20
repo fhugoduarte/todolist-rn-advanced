@@ -6,8 +6,8 @@ import { Button } from '~/components/Button';
 import { InputForm } from '~/components/form/InputForm';
 
 import { useValidateForm } from '~/hooks/useValidateForm';
-import type { FormData } from '~/queries/useCreateTagMutation';
-import { useCreateTagMutation } from '~/queries/useCreateTagMutation';
+import type { FormData } from '~/queries/tags/useCreateTagMutation';
+import { useCreateTagMutation } from '~/queries/tags/useCreateTagMutation';
 import type { TasksGroupParams } from '~/routes/app/tasks/tasks.group';
 
 import { schema } from './schema';

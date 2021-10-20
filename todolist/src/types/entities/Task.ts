@@ -1,4 +1,4 @@
-import { ITag } from "./Tag";
+import type { ITag } from './Tag';
 
 export interface ITask {
   id: string;

@@ -6,28 +6,29 @@ import { Button } from '~/components/Button';
 import { InputForm } from '~/components/form/InputForm';
 
 import { useValidateForm } from '~/hooks/useValidateForm';
+import type { FormData } from '~/queries/tasks/useCreateTaskMutation';
+import { useCreateTaskMutation } from '~/queries/tasks/useCreateTaskMutation';
 import type { TasksGroupParams } from '~/routes/app/tasks/tasks.group';
 
 import { schema } from './schema';
 
 import { styles } from './styles';
 
-interface FormData {
-  title: string;
-  description: string;
-  tag?: string;
-}
-
 type Props = NativeStackScreenProps<TasksGroupParams, 'NewTask'>;
 
 export function NewTaskScreen({ navigation }: Props) {
+  const createTaskMutation = useCreateTaskMutation({
+    onSuccess: () => {
+      navigation.goBack();
+    },
+  });
+
   const { control, handleSubmit } = useValidateForm<FormData>({
     schema,
   });
 
   function handleCreateTask(data: FormData) {
-    console.log('DATA', data);
-    // do nothing
+    createTaskMutation.mutate(data);
   }
 
   return (
@@ -40,6 +41,7 @@ export function NewTaskScreen({ navigation }: Props) {
         <Button
           title="CRIAR"
           onPress={handleSubmit(handleCreateTask)}
+          isLoading={createTaskMutation.isLoading}
           style={styles.button}
         />
       </View>

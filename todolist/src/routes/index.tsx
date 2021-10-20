@@ -7,7 +7,7 @@ export function Routes() {
   return (
     <NavigationContainer
       linking={{
-        prefixes: ['todoapp://todoapp'],
+        prefixes: ['todolist://todolist'],
         config: {
           screens: linkingConfig,
         },

@@ -11,6 +11,13 @@ const ONE_MINUTE = 6000;
 
 const client = new QueryClient();
 
+if (__DEV__) {
+  // eslint-disable-next-line import/no-extraneous-dependencies
+  import('react-query-native-devtools').then(({ addPlugin }) => {
+    addPlugin({ queryClient: client });
+  });
+}
+
 export function useCreateQueryClient() {
   const { isGreatConnection } = useNetworkInfo();
 

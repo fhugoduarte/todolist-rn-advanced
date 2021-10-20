@@ -6,6 +6,6 @@ export async function delay({ fails } = { fails: false }) {
       } else {
         resolve(true);
       }
-    }, 3000);
+    }, 1000);
   });
 }
