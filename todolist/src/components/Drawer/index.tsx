@@ -7,12 +7,15 @@ import { BorderlessButton } from 'react-native-gesture-handler';
 import { Button } from '~/components/Button';
 
 import { colors } from '~/constants/colors';
+import { useAuth } from '~/hooks/useAuth';
 
 import { NavigationItem } from './components/NavigationItem';
 
 import { styles } from './styles';
 
 export function Drawer({ navigation }: DrawerContentComponentProps) {
+  const { signOut } = useAuth();
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -32,7 +35,7 @@ export function Drawer({ navigation }: DrawerContentComponentProps) {
         />
       </View>
 
-      <Button title="Sair" color="danger" onPress={() => {}} />
+      <Button title="Sair" color="danger" onPress={signOut} />
     </View>
   );
 }

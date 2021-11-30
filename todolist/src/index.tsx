@@ -4,6 +4,7 @@ import { QueryClientProvider } from 'react-query';
 
 import { useCreateQueryClient } from '~/hooks/useCreateQueryClient';
 
+import { AuthProvider } from './providers/AuthProvider';
 import { Routes } from './routes';
 
 export function Main() {
@@ -17,7 +18,9 @@ export function Main() {
         backgroundColor="transparent"
       />
 
-      <Routes />
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

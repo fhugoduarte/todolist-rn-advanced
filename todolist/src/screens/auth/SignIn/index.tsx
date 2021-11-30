@@ -5,6 +5,7 @@ import { Keyboard, View, TouchableWithoutFeedback } from 'react-native';
 import { Button } from '~/components/Button';
 import { InputForm } from '~/components/form/InputForm';
 
+import { useAuth } from '~/hooks/useAuth';
 import { useValidateForm } from '~/hooks/useValidateForm';
 import type { AuthStackParams } from '~/routes/auth/index.stack';
 
@@ -15,12 +16,14 @@ import { styles } from './styles';
 type Props = NativeStackScreenProps<AuthStackParams>;
 
 export function SignInScreen({ navigation }: Props) {
+  const { signIn } = useAuth();
+
   const { control, handleSubmit } = useValidateForm({
     schema,
   });
 
   function handleSignIn() {
-    // do nothing
+    signIn();
   }
 
   return (

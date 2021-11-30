@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { LogBox } from 'react-native';
 import { QueryClient } from 'react-query/';
 
+import { isDevelopment } from '~/constants/environments';
+
 import { useNetworkInfo } from './useNetworkInfo';
 
 LogBox.ignoreLogs(['Setting a timer for a long period']);
@@ -11,7 +13,7 @@ const ONE_MINUTE = 6000;
 
 const client = new QueryClient();
 
-if (__DEV__) {
+if (isDevelopment) {
   // eslint-disable-next-line import/no-extraneous-dependencies
   import('react-query-native-devtools').then(({ addPlugin }) => {
     addPlugin({ queryClient: client });

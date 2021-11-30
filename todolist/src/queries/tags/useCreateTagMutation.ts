@@ -2,8 +2,6 @@ import type { AxiosError } from 'axios';
 import type { UseMutationOptions } from 'react-query';
 import { useMutation, useQueryClient } from 'react-query';
 
-import { delay } from '~/utils/delay';
-
 import { api } from '~/services/api';
 import type { ITag } from '~/types/entities';
 
@@ -12,7 +10,6 @@ import { QUERY_KEY as TAGS_KEY } from './useGetTagsQuery';
 export type FormData = Omit<ITag, 'id'>;
 
 async function handleCreateTag(formData: FormData) {
-  await delay();
   const { data } = await api.post<ITag>('tags', formData);
 
   return data;

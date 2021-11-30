@@ -47,7 +47,9 @@ export function Button({
         </Text>
       )}
 
-      {isLoading && <Loader color={colors.lightText} />}
+      {isLoading && (
+        <Loader color={colors.lightText} accessibilityLabel="Carregando" />
+      )}
     </RectButton>
   );
 }
